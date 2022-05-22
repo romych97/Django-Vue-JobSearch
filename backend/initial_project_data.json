@@ -1,0 +1,20 @@
+[
+   {
+      "model":"project.project",
+      "pk":1,
+      "fields":{
+         "title":"project 1",
+         "text":"project 1 description",
+         "owner": 1
+      }
+   },
+   {
+      "model":"project.project",
+      "pk":2,
+      "fields":{
+         "title":"project 2",
+         "text":"project 2 description",
+         "owner": 1
+      }
+   }
+]

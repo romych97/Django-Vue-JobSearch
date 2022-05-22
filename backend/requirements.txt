@@ -1,0 +1,8 @@
+Django==4.0.4
+djangorestframework
+django-cors-headers
+dj_rest_auth
+mysqlclient
+django-allauth
+psycopg2
+drf-yasg
