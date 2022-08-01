@@ -12,7 +12,7 @@
   >
     <div class="container flex mx-auto">
       <div class="w-auto">
-        <a href="https://flowbite.com" class="flex items-center">
+        <a href="#" class="flex items-center">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
             class="mr-3 h-6 sm:h-9"
