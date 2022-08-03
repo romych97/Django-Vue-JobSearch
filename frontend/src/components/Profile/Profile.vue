@@ -10,7 +10,7 @@
                 <div class="bg-white p-3 border-t-4 border-green-400">
                     <div class="image overflow-hidden">
                         <img class="h-auto w-full mx-auto"
-                            src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-110.jpg"
+                            src="https://mdbootstrap.com/img/new/avatars/2.jpg"
                             alt="">
                     </div>
                     <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">Jane Doe</h1>

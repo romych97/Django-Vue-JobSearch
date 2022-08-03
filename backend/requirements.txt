@@ -6,3 +6,4 @@ mysqlclient
 django-allauth
 psycopg2
 drf-yasg
+channels

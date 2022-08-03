@@ -8,6 +8,8 @@ import Messages from './components/Messages/Messages.vue'
 import Login from './components/Login/Login.vue'
 import Profile from './components/Profile/Profile.vue'
 import Project from './components/Project/Project.vue'
+import Chat from './components/Chat/Chat.vue'
+import ChatRoom from './components/Chat/ChatRoom.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
 import VueCookies from 'vue-cookies'
@@ -51,14 +53,17 @@ const routes = [
     name: 'Project',
     component: Project
   },
-//   {
-//     path: '/about',
-//     name: 'About',
-//     // route level code-splitting
-//     // this generates a separate chunk (about.[hash].js) for this route
-//     // which is lazy-loaded when the route is visited.
-//     component: () => import(/* webpackChunkName: "about" */ './components/About/About.vue')
-//   }
+  {
+    path: '/chat/',
+    name: 'Chat',
+    component: Chat
+  },
+  {
+    path: '/chat/room/:id',
+    name: 'ChatRoom',
+    component: ChatRoom
+  },
+
 ]
 const router = createRouter({
   history: createWebHistory(''), // createWebHistory(process.env.BASE_URL),
