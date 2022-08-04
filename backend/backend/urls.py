@@ -39,7 +39,7 @@ urlpatterns = [
 
     path('chat/', include('chat.urls')),
 
-    path('auth/', include('dj_rest_auth.urls')),
+    # path('auth/', include('dj_rest_auth.urls')),
     path('api/', include('api.urls')),
 
     path('admin/', admin.site.urls),
