@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     # 'dj_rest_auth', # new
     'drf_yasg',
     'channels',
+    'rest_framework_simplejwt',
 
     # Local Apps
     'api.apps.ApiConfig', # new
