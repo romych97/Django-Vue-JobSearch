@@ -5,7 +5,7 @@ from django.utils import timezone
 # Create your models here.
 class Project(models.Model):
     
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    # owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     price = models.IntegerField(default=0)
     text = models.TextField()

@@ -29,7 +29,7 @@ DEBUG = True
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication', 
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -40,7 +40,7 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = (    
     "django.contrib.auth.backends.ModelBackend",    
-    "allauth.account.auth_backends.AuthenticationBackend",
+    # "allauth.account.auth_backends.AuthenticationBackend",
 )
 
 # Application definition
@@ -62,15 +62,16 @@ INSTALLED_APPS = [
     'rest_framework.authtoken', # new
     'django.contrib.sites', # new
     'corsheaders', # new
-    'dj_rest_auth', # new
+    # 'dj_rest_auth', # new
     'drf_yasg',
+    'channels',
 
     # Local Apps
     'api.apps.ApiConfig', # new
-    'account.apps.AccountConfig', # new
+    # 'account.apps.AccountConfig', # new
     'project.apps.ProjectConfig', # new
     'chat',
-    'channels',
+    # 'authentication',
 ]
 
 MIDDLEWARE = [
@@ -196,6 +197,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
 ]
 
+# AUTH_USER_MODEL = 'authentication.User'
 # AUTH_USER_MODEL = 'users.CustomUser'
 
 # REST_USE_JWT = True

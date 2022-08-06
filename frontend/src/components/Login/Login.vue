@@ -5,8 +5,12 @@
         <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
         <p class="mt-2 text-center text-sm text-gray-600">
-          Or
-          <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> start your 14-day free trial </a>
+          
+          you are login now? {{ isLogin }}
+          <!-- Or -->
+          <!-- <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+
+          </a> -->
         </p>
       </div>
       <form id="app" @submit="checkForm"
@@ -14,7 +18,7 @@
       >
         <input type="hidden" name="remember" value="true">
         <div class="rounded-md shadow-sm -space-y-px">
-          <div>
+          <div class="mb-3">
             <label for="login-address" class="sr-only">login address</label>
             <input v-model="form.username" id="login-address" name="login" type="login" autocomplete="login" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="login address">
           </div>
@@ -36,7 +40,7 @@
         </div>
 
         <div>
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <button @click="auth" type="button" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
               <!-- Heroicon name: solid/lock-closed -->
               <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -51,63 +55,21 @@
   </div>
 </template>
 
-<script>
-import axios from 'axios' 
+<script setup>
 
-export default {
-  data() {
-    return {
-      form: {
-        username: '',
-        password: '',
-      }
-    }
-  },
-  mounted() {
-    // this.checkAuth()
-  },
-  methods: {
-    checkForm: function (e) {
-      console.log("🚀 ~ file: Login.vue ~ line 64 ~ e", e)
-      e.preventDefault();
+  import axios from 'axios' 
+  import { ref, reactive, onMounted } from 'vue' 
 
-      this.auth();
- 
-      // send get request
-      // this.$http.get(url, this.form, function (data, status, request) {
+  const form = reactive({
+    username: '',
+    password: '',
+  })
 
-      // // set data on vm
-      // // this.response = data;
+  const isLogin = ref<Boolean>(false)
 
-      // }).error(function (data, status, request) {
-      //     // handle error
-      // });
-
-      e.preventDefault();
-    },
-
-  // checkAuth() {
-  //   if (localStorage.getItem('token') === null) {
-  //     window.location.replace('http://localhost:3000/login');
-  //   } else {
-  //     fetch('http://127.0.0.1:8000/auth/user/', {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Token ${localStorage.getItem('token')}`
-  //       }
-  //     }).then(data => {
-  //       return data.json()
-  //     }).then(data => {
-  //       console.log("📝 - file: HelloWorld.vue - line 31 - checkAuth - data", data)
-  //     });
-  //   } 
-  // },
-
-
-  auth() {
-    let csrftoken =  this.$cookies.get('csrftoken');
-    console.log("📝 - file: HelloWorld.vue - line 24 - created - csrftoken", csrftoken)
+  const auth = () => {
+    // let csrftoken =  this.$cookies.get('csrftoken');
+    // console.log("📝 - file: HelloWorld.vue - line 24 - created - csrftoken", csrftoken)
 
     const config = {
         withCredentials: true,
@@ -118,7 +80,7 @@ export default {
           // 'Authorization': 'Token o3byMw11upDVuq3KWcoAurw3AGy2Dq7SyhpmIqYimlaVpyQ6YDr7VMgFzQJTIcs9'
         }
     };
-    const body = JSON.stringify(this.form);
+    const body = JSON.stringify(form);
 
     axios.post(`http://localhost:8000/auth/login/`, body, config).then(data => {
       console.log("🚀 ~ file: Login.vue ~ line 121 ~ axios.post ~ data", data)
@@ -129,9 +91,7 @@ export default {
       }
     });
   }
-  },
 
-}
 </script>
 
 <style>
