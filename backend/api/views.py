@@ -3,6 +3,12 @@ from django.http import JsonResponse, HttpResponse
 
 from django.shortcuts import render
 
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework import permissions
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateDestroyAPIView)
+from . import serializer
+from django.contrib.auth.decorators import login_required
 from project.models import Project
 from django.core import serializers
 # def index(request):
@@ -17,7 +23,10 @@ def data(request):
 
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
-
+# @csrf_exempt
+# @permission_classes((permissions.IsAuthenticated,))
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
 def projects(request):
     exampleData = Project.objects.all()
     serialized_qs = serializers.serialize('json', exampleData)

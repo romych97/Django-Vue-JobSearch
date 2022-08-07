@@ -58,7 +58,15 @@
 <script setup>
 
   import axios from 'axios' 
+  import { storeToRefs } from 'pinia'
+  import { usePostStore } from '/src/store/store'
   import { ref, reactive, onMounted } from 'vue' 
+
+  const { posts, loading, error } = storeToRefs(usePostStore())
+  const { fetchPosts } = usePostStore()
+
+  // fetchPosts()
+  console.log("file: Login.vue ~ line 69 ~ fetchPosts()", fetchPosts())
 
   const form = reactive({
     username: '',
@@ -82,10 +90,11 @@
     };
     const body = JSON.stringify(form);
 
-    axios.post(`http://localhost:8000/auth/login/`, body, config).then(data => {
+    axios.post(`http://localhost:8000/api/token/`, body, config).then(data => {
       console.log("🚀 ~ file: Login.vue ~ line 121 ~ axios.post ~ data", data)
       try {
-        localStorage.setItem('token', data.data.key)
+        localStorage.setItem('accessToken', data.data.access)
+        localStorage.setItem('refreshToken', data.data.refresh)
       } catch(e) {
 
       }

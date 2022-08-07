@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia' // Import
 import App from './App.vue'
+
 import './assets/index.css'
 
 import MainPage from './components/MainPage/MainPage.vue'
@@ -19,6 +21,7 @@ import VueCookies from 'vue-cookies'
 
 
 const app = createApp(App)
+app.use(createPinia())
 app.use(VueCookies)
 // myV3App.component('SomeComponent', SomeComponent)
 
