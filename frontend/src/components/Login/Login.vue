@@ -61,44 +61,21 @@
   import { storeToRefs } from 'pinia'
   import { usePostStore } from '/src/store/store'
   import { ref, reactive, onMounted } from 'vue' 
+  import VueCookies from 'vue-cookies'
+  import { useAuthStore } from '../../store/store';
 
   const { posts, loading, error } = storeToRefs(usePostStore())
   const { fetchPosts } = usePostStore()
+  const authStore = useAuthStore();
 
-  // fetchPosts()
-  console.log("file: Login.vue ~ line 69 ~ fetchPosts()", fetchPosts())
+  const form = reactive({ username: '', password: '', })
 
-  const form = reactive({
-    username: '',
-    password: '',
-  })
-
-  const isLogin = ref<Boolean>(false)
+  const isLogin = ref(false)
 
   const auth = () => {
-    // let csrftoken =  this.$cookies.get('csrftoken');
-    // console.log("📝 - file: HelloWorld.vue - line 24 - created - csrftoken", csrftoken)
-
-    const config = {
-        withCredentials: true,
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'X-CSRFToken': '8Fz6HbID7yTfhiBd4EtMVaYixoMOVbVd6gnmi2LFoPTDDpIerycdJc7F07sMncYV',
-          // 'Authorization': 'Token o3byMw11upDVuq3KWcoAurw3AGy2Dq7SyhpmIqYimlaVpyQ6YDr7VMgFzQJTIcs9'
-        }
-    };
-    const body = JSON.stringify(form);
-
-    axios.post(`http://localhost:8000/api/token/`, body, config).then(data => {
-      console.log("🚀 ~ file: Login.vue ~ line 121 ~ axios.post ~ data", data)
-      try {
-        localStorage.setItem('accessToken', data.data.access)
-        localStorage.setItem('refreshToken', data.data.refresh)
-      } catch(e) {
-
-      }
-    });
+    authStore.userLogin(form)
+    isLogin.value = authStore.isAuth
+    console.log("file: Login.vue ~ line 78 ~ auth ~ isLogin", isLogin)
   }
 
 </script>

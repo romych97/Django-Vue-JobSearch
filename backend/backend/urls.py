@@ -44,13 +44,12 @@ schema_view = get_schema_view(
 urlpatterns = [ 
     path('', views.index),
 
-    # path('chat/', include('chat.urls')),
-
-    # path('auth/', include('dj_rest_auth.urls')),
-    path('api/', include('api.urls')),
     # path('api/test', views.TestAPI.as_view()),
+    path('api/', include('api.urls')),
 
     path('admin/', admin.site.urls),
+
+    path('api/user', include('user.urls')),
 
     # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/', views.LoginView.as_view(), name='token_obtain_pair'),
